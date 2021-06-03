@@ -1,0 +1,17 @@
+@startuml
+'Bricks 1'
+
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide empty members
+
+object one   #white;line:black
+object two   #black
+object three #black
+object four  #white;line:black
+
+one -r[hidden]- two
+three -r[hidden]- four
+one -d[hidden]- three
+@enduml

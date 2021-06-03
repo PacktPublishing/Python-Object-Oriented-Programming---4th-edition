@@ -1,0 +1,49 @@
+@startuml
+'figure 2: Napping diagram'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+skinparam classAttributeIconSize 0
+
+abstract class Container {
++ {abstract} __contains__(item)
+}
+
+abstract class Iterable {
++ {abstract} __iter__()
+}
+
+abstract class Sized {
++ {abstract} __len__(item)
+}
+
+abstract class Collection {
+}
+
+Sized <|-- Collection
+Iterable <|-- Collection
+Container <|-- Collection
+
+abstract class Mapping {
++ {abstract} __getitem__(key)
++ {abstract} keys()
++ {abstract} items()
++ {abstract} values()
++ {abstract} get(key, default)
+}
+
+Collection <|-- Mapping
+
+abstract class MutableMapping {
++ {abstract} __setitem__(key, value)
++ {abstract} __delitem__(key)
+}
+
+Mapping <|-- MutableMapping
+
+class dict {}
+
+MutableMapping <|-- dict
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+'fig_6'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+hide abstract circle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Mechanic {}
+
+class Car {
++ brakes: DiscBrakes
++ gas_pedal
++ engine: FuelInjected
++ transmission: FiveSpeed
++ adjust_brake()
++ change_oil()
+}
+
+Mechanic --- Car : maintains >
+
+class Driver {}
+
+abstract class AbstractCar as "Car" {
++ brakes
++ gas_pedal
++ steer()
++ change_gears()
++ apply_brake()
+}
+
+Driver --- AbstractCar : drives >
+
+@enduml

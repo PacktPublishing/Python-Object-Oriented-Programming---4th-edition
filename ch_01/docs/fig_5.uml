@@ -1,0 +1,27 @@
+@startuml
+'fig_5'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Orange {
++ weight: float
++ orchard: str
++ date_picked: date
++ basket: Basket
++ pick(basket: Basket) : None
++ squeeze() : float
+}
+class Basket {
++ location: str
++ oranges: List[Orange}
++ sell(customer: Customer) : None
++ discard() : None
+}
+Orange "*" --- "1" Basket : go in >
+
+
+@enduml

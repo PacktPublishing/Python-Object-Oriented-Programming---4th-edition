@@ -1,0 +1,36 @@
+@startuml
+'figure 1: The Template Pattern'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+class Client {
+    + something_interesting()
+}
+
+class TemplateCommand {
+    + do_process()
+    + step_1()
+    + {abstract} step_2()
+    + step_3()
+    + step_4()
+}
+
+class Implementation_Choice {
+    + step_2()
+}
+
+class Another_Choice {
+    + step_2()
+}
+
+
+Client -- TemplateCommand
+
+TemplateCommand <|-- Implementation_Choice
+TemplateCommand <|-- Another_Choice
+
+@enduml

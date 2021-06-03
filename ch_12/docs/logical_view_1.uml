@@ -1,0 +1,58 @@
+@startuml
+'figure 4: Rethinking classification'
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+
+class Sample {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+}
+class KnownSample {
+    sample: Sample
+    species: str
+}
+note bottom: Created at load time
+
+class UnknownSample {
+    sample: Sample
+}
+note bottom: Created by user
+
+class TrainingKnownSample #Silver {
+    sample: KnownSample
+}
+class TestingKnownSample #Silver {
+    sample: KnownSample
+}
+note "Created by partition()" as partition
+partition .. TrainingKnownSample
+partition .. TestingKnownSample
+
+KnownSample *--> Sample
+
+UnknownSample *--> Sample
+
+TrainingKnownSample *--> KnownSample
+
+TestingKnownSample *--> KnownSample
+
+class ClassifiedKnownSample {
+    sample: KnownSample
+    classification: str
+}
+note top: Created by classifier while testing
+
+class ClassifiedUnknownSample {
+    sample: UnknownSample
+    classification: str
+}
+note top: Created by classifier for user
+
+ClassifiedKnownSample *--> KnownSample
+ClassifiedKnownSample ..> TestingKnownSample : based on
+ClassifiedUnknownSample *--> UnknownSample
+@enduml

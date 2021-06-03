@@ -1,0 +1,36 @@
+@startuml
+'figure 2: Logical View'
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+
+class TrainingData {
+    name: str
+    uploaded: datetime
+    tested: datetime
+}
+class Sample {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+}
+class KnownSample {
+    species: str
+}
+class Hyperparameter {
+    k: int
+    quality: float
+    classify(s: Sample): str
+}
+class "List[KnownSample]"
+class "List[Hyperparameter]"
+TrainingData *---> "List[KnownSample]" : training >
+TrainingData *---> "List[KnownSample]" : testing >
+TrainingData *---> "List[Hyperparameter]" : tuning >
+"List[KnownSample]" o--> KnownSample
+"List[Hyperparameter]" *--> Hyperparameter
+Sample <|-- KnownSample
+Hyperparameter ...> TrainingData : data >
+@enduml

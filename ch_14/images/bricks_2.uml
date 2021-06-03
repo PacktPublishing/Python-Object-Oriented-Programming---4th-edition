@@ -1,0 +1,20 @@
+@startuml
+'Bricks 2'
+digraph G {
+  bricks [
+     shape=plaintext
+     label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+        <TR>
+            <TD BGCOLOR="white">&nbsp;</TD>
+            <TD BGCOLOR="black">&nbsp;</TD>
+        </TR>
+        <TR>
+            <TD BGCOLOR="black">&nbsp;</TD>
+            <TD BGCOLOR="white">&nbsp;</TD>
+        </TR>
+        </TABLE>
+    >
+    ]
+}
+@enduml

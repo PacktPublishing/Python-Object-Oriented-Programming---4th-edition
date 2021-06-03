@@ -1,0 +1,41 @@
+@startuml
+'figure 8: NMEA Parser States'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+
+state "waiting for $" as start
+start : zero checksum
+
+state "header"
+header : update checksum
+
+state "body"
+body: update checksum
+
+state checksum
+
+state "cr and nl" as end
+end : validate
+
+
+[*] --> start : starting
+
+start --> header   : on "$"
+
+header --> body    : after 5 chars
+header --> start   : on "$"
+
+body --> checksum  : on "*"
+body --> start     : on "$"
+
+checksum --> end    : after 2 chars
+checksum --> start  : on "$"
+
+end --> header     : on "$"
+@enduml
+

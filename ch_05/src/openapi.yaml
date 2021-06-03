@@ -1,0 +1,176 @@
+openapi: 3.0.1
+info:
+  title: Classifier
+  version: "1.0"
+servers:
+- url: https://127.0.0.1:5000/v1
+security:
+  - BasicAuth: []
+paths:
+  /model:
+    post:
+      summary: Add training data
+      operationId: training_data_load
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SampleCollection'
+        required: true
+      responses:
+        405:
+          description: Invalid input
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        401:
+          description: Not Authorized
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        201:
+          description: Created
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /model/{name}/tests:
+    post:
+      summary: Provide Hyperparameter and Test
+      operationId: training_data_test
+      parameters:
+      - name: name
+        in: path
+        description: Training Data Name
+        required: true
+        schema: 
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hyperparameter'
+      responses:
+        200:
+          description: Test Results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hyperparameter'
+        400:
+          description: Invalid Hyperparameter Value
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        401:
+          description: Not Authorized
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        404:
+          description: Unknown Training Data Name
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /model/{name}/classify:
+    get:
+      summary: Classify a Sample
+      operationId: training_data_classify
+      parameters:
+      - name: name
+        in: path
+        description: Training Data Name
+        required: true
+        schema: 
+          type: string
+      - name: sample
+        in: query
+        description: Sample to Classify
+        required: true
+        schema:
+          type: object
+      responses:
+        200:
+          description: successful classification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sample'
+        401:
+          description: Not Authorized
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        400:
+          description: Invalid Sample
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        404:
+          description: Unknown Training Data Name
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+components:
+  schemas:
+    Hyperparameter:
+      type: object
+      required:
+        - distance
+        - k
+      properties:
+        summary:
+          type: string
+        distance:
+          type: string
+        k:
+          type: integer
+          maximum: 1
+        quality:
+          type: number
+    Sample:
+      required:
+      - petal_length
+      - petal_width
+      - sepal_length
+      - sepal_width
+      type: object
+      properties:
+        petal_length:
+          type: number
+        petal_width:
+          type: number
+        sepal_length:
+          type: number
+        sepal_width:
+          type: number
+        species:
+          type: string
+        classification:
+          type: string
+    SampleCollection:
+      type: array
+      items: 
+        $ref: '#/components/schemas/Sample'
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        type:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

@@ -1,0 +1,18 @@
+@startuml
+'figure 1: Exception Hierarchy'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+
+class BaseException {}
+class SystemExit {}
+class KeyboardInterrupt {}
+class Exception {}
+class "Most Other Exceptions"  as others {}
+
+BaseException <|-- SystemExit
+BaseException <|-- KeyboardInterrupt
+BaseException <|-- Exception
+Exception <|-- others
+@enduml

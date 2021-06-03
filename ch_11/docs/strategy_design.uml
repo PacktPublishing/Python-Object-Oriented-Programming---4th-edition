@@ -1,0 +1,53 @@
+@startuml
+'figure 10: Hyperparameter and Distance classes'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+skinparam classAttributeIconSize 0
+
+class TrainingData {
+    name : str
+    uploaded : datetime
+    tested : datetime
+    load(source: Iterable)
+}
+class Hyperparameter {
+    k: int
+    quality: float
+    distance : Distance
+    classifier : Classifier
+    test(): float
+    classify(sample: Sample) : str
+}
+class Sample {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+}
+class Distance {
+    distance(s1: Sample, s2: Sample) : float
+}
+class Chebyshev {}
+class Manhattan {}
+class Euclidean {}
+class Classifier {
+    classify(k: int, d: Distance, train: Sample, unk: Sample) : float
+}
+class K_NN_Bisect {}
+class K_NN_HeapQ {}
+
+TrainingData *--> Hyperparameter : Tuning >
+TrainingData *--> Sample : Testing >
+TrainingData *--> Sample : Training >
+Hyperparameter ..> TrainingData
+Hyperparameter --> Distance : distance
+Hyperparameter --> Classifier : classifier
+Distance <|-- Chebyshev
+Distance <|-- Manhattan
+Distance <|-- Euclidean
+Classifier <|-- K_NN_Bisect
+Classifier <|-- K_NN_HeapQ
+Classifier --> Distance
+@enduml

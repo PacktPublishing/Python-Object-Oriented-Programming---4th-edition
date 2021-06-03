@@ -1,0 +1,30 @@
+@startuml
+'figure 1: inheritance diagram'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+skinparam classAttributeIconSize 0
+
+class Object {
++ __init__()
+}
+
+class Contact {
++ __init__()
+}
+
+class AddressHolder {
++ __init__()
+}
+
+class Friend {
++ __init__()
+}
+
+Object <|-- Contact
+Object <|-- AddressHolder
+Contact <|-- Friend
+AddressHolder <|-- Friend
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+'processa_view_1'
+
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+
+start
+
+:Validate name and
+Sample instances;
+
+if (valid) then (yes)
+    :Partition Samples;
+    :Save new TrainingData;
+    stop
+else (no)
+    :Respond with an error;
+    stop
+endif
+
+@enduml

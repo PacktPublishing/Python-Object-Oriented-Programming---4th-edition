@@ -1,0 +1,3 @@
+username,email,real_name,role,password
+noriko,noriko@example.com,Noriko K. L.,botanist,pbkdf2:sha256:150000$BN8cEAws$c67e695964f0222d3b136c1796e8d7b48e5d489dfa5f242d797ecd9362e78916
+emma,emma@example.com,Emma K.,researcher,pbkdf2:sha256:150000$s9Ev2Lqk$b1d90662e0784cfbe2ef1fbe4407cf2ae346e47845d0ad5c680b6dad889ae8c0

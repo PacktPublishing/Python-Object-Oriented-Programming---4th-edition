@@ -1,0 +1,57 @@
+[project]
+name = "classifier"
+version = "2021.4.0"
+description = "Python 3 Object-Oriented Programming, 4th ed., Chapter 13"
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = [ "k-NN", "object-oriented design",]
+[[project.authors]]
+email = "slott56@gmail.com"
+
+[[project.authors]]
+name = "Steven F. Lott"
+
+[project.license]
+file = "LICENSE.txt"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+minversion = 3.4.0
+skipsdist = True
+envlist = testenv
+
+[testenv]
+deps =
+  -rrequirements.txt
+  black
+  pytest==6.2.4
+  tox==3.20.0
+  mypy==0.812
+setenv =
+  PYTHONPATH = {toxinidir}/src
+commands =
+  black src
+  black tests
+  python -m doctest --option ELLIPSIS src/remote_logging_app.py
+  python -m doctest --option ELLIPSIS src/checksum_writer.py
+  python -m doctest --option ELLIPSIS src/log_catcher.py
+  python -m doctest --option ELLIPSIS src/model.py
+  python -m doctest --option ELLIPSIS src/flight_status_redis.py
+  python -m doctest --option ELLIPSIS src/stats.py
+  python -m doctest --option ELLIPSIS docs/case_study_13.md
+  python -m doctest --option ELLIPSIS bonus/vigenere_cipher.py
+  python -m pytest --log-cli-level=INFO
+  mypy --strict --show-error-codes --python-version 3.9 tests src
+
+[testenv:coverage]
+deps =
+  -rrequirements.txt
+  pytest==6.2.4
+  coverage==5.4
+commands =
+  coverage run --omit='.tox/*' -m pytest tests/test_coverage.py
+  coverage report
+  coverage report -m
+
+"""

@@ -1,0 +1,57 @@
+[project]
+name = "classifier"
+version = "2021.4.0"
+description = "Python 3 Object-Oriented Programming, 4th ed., Chapter 3"
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = [ "k-NN", "object-oriented design",]
+[[project.authors]]
+email = "slott56@gmail.com"
+
+[[project.authors]]
+name = "Steven F. Lott"
+
+[project.license]
+file = "LICENSE.txt"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+minversion = 3.4.0
+skipsdist = True
+envlist = {py38, py39}
+[base]
+deps =
+	-rrequirements.txt
+	black
+	pytest==6.2.4
+	tox==3.20.0
+	mypy==0.812
+setenv =
+	PYTHONPATH = {toxinidir}/src
+commands =
+	black src
+	python -m doctest --option ELLIPSIS src/commerce.py
+	python -m doctest --option ELLIPSIS src/commerce_naive.py
+	python -m doctest --option ELLIPSIS src/model.py
+	python -m doctest --option ELLIPSIS src/media_model_1.py
+	python -m doctest --option ELLIPSIS docs/case_study_3.md
+	mypy --strict --show-error-codes src
+
+[testenv:py38]
+deps =
+	{[base]deps}
+setenv =
+	{[base]setenv}
+commands =
+	python -m doctest --option ELLIPSIS docs/examples_38.md
+
+[testenv:py39]
+deps =
+	{[base]deps}
+setenv =
+	{[base]setenv}
+commands =
+	{[base]commands}
+	python -m doctest --option ELLIPSIS docs/examples.md
+"""

@@ -1,0 +1,19 @@
+@startuml
+'figure 3: Rethinking classification'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+
+title TestingKnownSample classification
+start
+
+:sample : __TestingKnownSample__ ]
+
+:Compute classification of sample, species : __str__;
+
+:Create __ClassifiedKnownSample__ from sample and species;
+
+:ClassifiedKnownSample
+    sample = sample
+    classification = species]
+@enduml

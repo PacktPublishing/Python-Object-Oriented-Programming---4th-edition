@@ -1,0 +1,35 @@
+@startuml
+'fig_9'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+hide abstract circle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Player {}
+
+class Position {
++ chess_board: Board
+}
+
+class "Chess Set" as chessset {
++ pieces: List[Piece]
++ board: Board
+}
+
+class Piece {
++ chess_set: Chess Set
+}
+
+class Board {
++ chess_set: Chess Set
++ positions: Position
+}
+
+Player "2" -- "1" chessset : make move >
+Position "64" --o "1" Board
+chessset "1" o-- "1" Board
+Piece "32" --o chessset
+@enduml

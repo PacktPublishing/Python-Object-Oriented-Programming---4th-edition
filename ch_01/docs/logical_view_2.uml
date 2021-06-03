@@ -1,0 +1,25 @@
+@startuml
+'logical_view_2'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+
+class TrainingData {
+    name: str
+    uploaded: datetime
+    tested: datetime
+    k: int
+    training: List[Sample]
+    testing: List[Sample]
+}
+class Sample {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+}
+TrainingData *--> Sample : training >
+TrainingData *--> Sample : testing >
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+'figure 5: NamedTuple classes'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+
+package inheritance {
+class Sample {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+}
+class KnownSample {
+    species: str
+}
+KnownSample --|> Sample
+}
+
+package composition {
+class Sample_C {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+}
+class KnownSample_C {
+    sample: Sample
+    species: str
+}
+KnownSample_C *--> Sample_C
+}
+@enduml

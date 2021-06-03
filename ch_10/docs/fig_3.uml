@@ -1,0 +1,27 @@
+@startuml
+'figure 1: Generators'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam componentStyle rectangle
+hide class circle
+
+folder "hash (mod 3) = 1" {
+    [Sample 262]
+    [Sample 67]
+    [Sample 304]
+}
+
+folder "hash (mod 3) = 2" {
+    [Sample 26]
+    [Sample 11]
+}
+folder "hash (mod 3) = 0" {
+    [Sample 231]
+    [Sample 342]
+}
+
+[Sample 262] <..> [Sample 304] : Equal
+
+@enduml

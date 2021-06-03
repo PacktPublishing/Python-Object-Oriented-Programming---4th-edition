@@ -1,0 +1,42 @@
+@startuml
+'figure 2: Dining Philosophers - Circular'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+
+[Philosopher 0]
+(Fork 0)
+
+[Philosopher 1]
+(Fork 1)
+
+[Philosopher 2]
+(Fork 2)
+
+[Philosopher 3]
+(Fork 3)
+
+[Philosopher 4]
+(Fork 4)
+
+(Fork 0) <.. [Philosopher 0]
+[Philosopher 0] .d.> (Fork 1)
+[Philosopher 0] -l-> (Spaghetti)
+
+(Fork 1) <.d. [Philosopher 1]
+[Philosopher 1] .d.> (Fork 2)
+[Philosopher 1] -l-> (Spaghetti)
+
+(Fork 2) <.l. [Philosopher 2]
+[Philosopher 2] .u.> (Fork 3)
+[Philosopher 2] -u-> (Spaghetti)
+
+(Fork 3) <.u. [Philosopher 3]
+[Philosopher 3] .u.> (Fork 4)
+[Philosopher 3] -r-> (Spaghetti)
+
+(Fork 4) <.u. [Philosopher 4]
+[Philosopher 4] .d.> (Fork 0)
+[Philosopher 4] -r-> (Spaghetti)
+
+@enduml

@@ -1,0 +1,57 @@
+[project]
+name = "classifier"
+version = "2021.4.0"
+description = "Python 3 Object-Oriented Programming, 4th ed., Chapter 14"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE.txt"}
+keywords = ["k-NN", "object-oriented design"]
+authors = [
+  {email = "slott56@gmail.com"},
+  {name = "Steven F. Lott"}
+]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+minversion = 3.4.0
+skipsdist = True
+envlist = testenv
+
+[testenv]
+deps =
+  -rrequirements.txt
+  black
+  pytest==6.2.4
+  tox==3.20.0
+  mypy==0.812
+
+setenv =
+  PYTHONPATH = {toxinidir}/src
+commands =
+  black src
+  python -m doctest --option ELLIPSIS src/async_1.py
+  python -m doctest --option ELLIPSIS src/code_search.py
+  python -m doctest --option ELLIPSIS src/delicatessen.py
+  python -m doctest --option ELLIPSIS src/demo_log_catcher.py
+  python -m doctest --option ELLIPSIS src/directory_search.py
+  python -m doctest --option ELLIPSIS src/log_catcher.py
+  python -m doctest --option ELLIPSIS src/model.py
+  python -m doctest --option ELLIPSIS src/philosophers.py
+  python -m doctest --option ELLIPSIS src/prime_factor.py
+  python -m doctest --option ELLIPSIS src/processes_1.py
+  python -m doctest --option ELLIPSIS src/remote_logging_app.py
+  python -m doctest --option ELLIPSIS src/threads_1.py
+  python -m doctest --option ELLIPSIS src/weather_async.py
+  python -m doctest --option ELLIPSIS src/weather_threads.py
+  python -m doctest --option ELLIPSIS bonus/image_compressor.py
+  python -m doctest --option ELLIPSIS bonus/image_compressor_alt.py
+  pytest -vv -x --log-cli-level=INFO
+  mypy --strict --show-error-codes --python-version 3.9 src
+
+[testenv:bench]
+commands =
+  mypy benches --strict --python-version 3.9
+  python benches/time_to_write.py
+
+"""

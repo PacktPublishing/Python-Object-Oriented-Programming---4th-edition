@@ -1,0 +1,62 @@
+@startuml
+'figure 4: Rethinking classification'
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+
+class Sample {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+}
+class KnownSample {
+    sample: Sample
+    species: str
+}
+
+class TrainingKnownSample {
+    sample: KnownSample
+}
+class TestingKnownSample {
+    sample: KnownSample
+}
+
+KnownSample *--> Sample
+
+TrainingKnownSample *--> KnownSample
+
+TestingKnownSample *--> KnownSample
+
+class TrainingData {
+    test: List
+    training: List
+    load()
+}
+
+TrainingData::test *-->  TestingKnownSample
+TrainingData::training *--> TrainingKnownSample
+
+
+class ClassifiedKnownSample {
+    sample: KnownSample
+    classification: str
+}
+
+ClassifiedKnownSample *--> KnownSample
+ClassifiedKnownSample ...> TestingKnownSample : based on
+
+class Hyperparameter {
+    training_data: TrainingData
+    k: int
+    algorithm: Distance
+    classify(Sample): str
+    test(): float
+}
+
+Hyperparameter::training_data --> TrainingData
+Hyperparameter::classify --> ClassifiedKnownSample : creates
+
+
+@enduml

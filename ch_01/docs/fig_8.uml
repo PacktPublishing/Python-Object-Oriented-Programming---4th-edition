@@ -1,0 +1,15 @@
+@startuml
+'fig_8'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+hide abstract circle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+object "Player" as p
+object "Chess Set" as cg
+
+p "2" --> "1" cg : make move >
+@enduml

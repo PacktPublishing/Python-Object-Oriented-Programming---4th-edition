@@ -1,0 +1,47 @@
+
+@startuml rle_class.png
+'figure 4: Classes'
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+class RLERun {
+    byte_state(byte)
+    emit()
+}
+class Replicate {
+    count: int # -127 <= count < 0
+    value: byte
+}
+class Literal {
+    count: int # 0 <= count < 128
+    value: list[byte]
+}
+
+RLERun <|-- Replicate
+RLERun <|-- Literal
+
+@enduml
+
+@startuml rle_state.png
+'figure 3: States'
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+[*] --> Literal : first byte
+Literal -> Literal : [last != next byte]
+Literal : [len == 128] emit Literal
+Literal : [exit] emit Literal
+
+Literal --> Replicate : [last == next byte]\nremove last\nseed Replicate
+Literal --> [*]
+Replicate --> Literal : [last != next byte]
+Replicate --> [*]
+
+Replicate -> Replicate : [last == next byte]
+Replicate : [len == 128] emit Replicate
+Replicate : [exit] emit Replicate
+@enduml

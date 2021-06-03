@@ -1,0 +1,77 @@
+@startuml
+'figure 12: The Composite Pattern'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+abstract class Component {
+    + some_action()
+}
+
+class Leaf {
+    + some_action()
+}
+
+class Composite {
+    + children: List[Component]
+    + some_action()
+}
+
+Component <|-- Leaf
+Component <|-- Composite
+Composite::children *-- "*" Component : "Contains"
+
+@enduml
+
+@startuml coposite-objects.png
+'figure 12: The Composite Pattern'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+object Root
+object "Leaf" as l1
+object "Composite" as c2
+object "Composite" as c3
+
+Root *-- l1
+Root *-- c2
+Root *-- c3
+
+object "Leaf" as c2_l4
+object "Composite" as c2_c4
+object "Leaf" as c2_l5
+
+c2 *-- c2_l4
+c2 *-- c2_c4
+c2 *-- c2_l5
+
+object "Leaf" as c2_c4_l6
+object "Leaf" as c2_c4_l7
+object "Leaf" as c2_c4_l8
+object "Leaf" as c2_c4_l9
+
+c2_c4 *-- c2_c4_l6
+c2_c4 *-- c2_c4_l7
+c2_c4 *-- c2_c4_l8
+c2_c4 *-- c2_c4_l9
+
+object "Leaf" as c3_l10
+object "Composite" as c3_c5
+
+c3 *-- c3_l10
+c3 *-- c3_c5
+
+object "Leaf" as c3_c5_l11
+object "Leaf" as c3_c5_l12
+
+c3_c5 *-- c3_c5_l11
+c3_c5 *-- c3_c5_l12
+
+@enduml

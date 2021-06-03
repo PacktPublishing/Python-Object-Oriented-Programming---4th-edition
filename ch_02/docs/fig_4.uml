@@ -1,0 +1,34 @@
+@startuml
+'figure 4: The Hyperparameter Class'
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+
+class TrainingData
+class Hyperparameter
+object "TrainingData instance" as td {
+    id: 140527584537136
+    params: List[Hyperparameter]
+}
+object list
+object "Hyperparameter instance" as hp_0 {
+    id: 98765432
+    training: TrainingData
+}
+object "Hyperparameter instance" as hp_1 {
+    id: 87654321
+    training: TrainingData
+}
+
+td ..> TrainingData
+hp_0 ..> Hyperparameter
+hp_1 ..> Hyperparameter
+td *--> list
+list --> hp_0: "[0]"
+list --> hp_1: "[1]"
+hp_0 --> td
+hp_1 --> td
+object "variable: td_1" as td_1
+td_1 --> td
+@enduml

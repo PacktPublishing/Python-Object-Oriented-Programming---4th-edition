@@ -1,0 +1,18 @@
+@startuml
+'context'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+
+actor Botanist as b
+actor User as u
+package Classifier {
+  usecase "Provide Training Data" as UC1
+  usecase "Set Parameters and Test Classifier" as UC2
+  usecase "Make Classification Request" as UC3
+}
+b --> UC1
+b --> UC2
+u --> UC3
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+'development_view_1'
+
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+
+package "Classifier" {
+  [View Functions]
+  [Data Model]
+  [Tests]
+}
+
+  [View Functions] ..> [flask]
+  [Tests] ..> [pytest]
+  [Tests] ..> [tox]
+  [View Functions] ..> [Data Model]
+  [Tests] ..> [Data Model]
+  [Tests] ..> [View Functions]
+@enduml

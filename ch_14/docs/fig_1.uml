@@ -1,0 +1,28 @@
+@startuml
+'figure 1: Log Catcher'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+node "App Server" {
+    [application 1]
+    [application 2]
+}
+
+cloud "Elsewhere" {
+    node "Logging Server" {
+        (socket)
+        (socket) - [Log Catcher] : < reads
+        database "LogFile"
+    }
+}
+
+[application 1] ..> (socket) : "SocketHandler"
+[application 2] ..> (socket) : "SocketHandler"
+
+[Log Catcher] -> LogFile : writes >
+
+@enduml

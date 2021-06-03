@@ -1,0 +1,22 @@
+@startuml
+'physical_view_1'
+
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+
+node client {
+  [client app]
+}
+
+node server {
+  [GUnicorn]
+  [Classifier]
+}
+
+[GUnicorn] ..> [Classifier]
+HTTPS - [GUnicorn]
+[client app] --> HTTPS
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+'figure 2: Logical Model'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+left to right direction
+
+class _SomeClass <<source>> {
+    attributes
+}
+class dataclass {
+    __call__(cls: Type) : Type
+}
+class SomeClass <<concrete>> {
+    attributes
+    __init__(self, attributes)
+    __repr__(self) : str
+    __eq__(self, other) : bool
+}
+_SomeClass ---> dataclass : input >
+dataclass ---> SomeClass : output >
+@enduml

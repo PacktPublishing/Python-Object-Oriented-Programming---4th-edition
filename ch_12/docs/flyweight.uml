@@ -1,0 +1,121 @@
+@startuml
+'figure 12: The Flyweight Pattern'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+class Client {
+    + massive_object : Massive
+    + something_useful(key)
+}
+
+class Massive {
+    + sharedState : Dict[key, SpecificState]
+}
+
+class SpecificState { }
+
+class FlyweightFactory {
+    + getFlyweight() : Flyweight
+}
+
+class Flyweight {
+    + useful_work(specific_state)
+}
+
+Client::massive_object *--> Massive
+Client::something_useful --> FlyweightFactory
+Massive *-- SpecificState
+
+FlyweightFactory --> Flyweight : "creates"
+Flyweight ...> SpecificState : "argument value"
+
+@enduml
+
+
+@startuml flyweight-classes.png
+'figure 13: The Flyweight Classes'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+class Point {
+    latitude: bytes
+    N/S: bytes
+    longitude: bytes
+    E/W: bytes
+}
+
+abstract class Message <flyweight> {
+    + buffer: Buffer
+    + offset: int
+    + set_fields(buffer: Buffer, offset: int)
+    + {abstract} fix() : Point
+}
+
+class GPGGA {
+    + fix() : Point
+}
+Message <|-- GPGGA
+
+class GPGLL {
+    + fix() : Point
+}
+Message <|-- GPGLL
+
+class GPRMC {
+    + fix() : Point
+}
+Message <|-- GPRMC
+
+class Buffer {
+  + List[bytes]
+}
+
+class MessageFactory {
+  + getMessage(buffer: Buffer, start: int) -> Message
+}
+
+Buffer *-- "*" Message
+MessageFactory --> Message : "Creates"
+Message --> Point : "Extracts"
+
+@enduml
+
+@startuml flyweight-circular.png
+'figure 13: The Flyweight Classes'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+
+object "GPGGA" as gpgga {
+  id = 140682444146048
+  buffer = Buffer
+  offset = 0
+}
+
+
+map Buffer {
+ 0 *-> gpgga
+ 68 => GPGLL
+ 98 => GPRMC
+}
+
+class Client {
+    + Buffer
+}
+
+Client --> Buffer
+gpgga --> Buffer
+
+@enduml

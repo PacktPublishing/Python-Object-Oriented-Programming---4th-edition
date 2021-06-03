@@ -1,0 +1,54 @@
+@startuml
+'figure 4: Frozen Dataclasses'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+
+class TrainingData {
+    name: str
+    uploaded: datetime.datetime
+    tested: datetime.datetime
+    load(source: Iterable)
+}
+class Sample <<frozen>> {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+}
+class KnownSample <<frozen>> {
+    species: str
+}
+class TrainingKnownSample {
+    sample: KnownSample
+}
+class TestingKnownSample {
+    sample: KnownSample
+    classification: str
+}
+class UnknownSample {
+    sample: Sample
+    classification: str
+}
+class Hyperparameter {
+    k: int
+    quality: float
+    classify(s: UnknownSample): str
+    test(t: List[TestingKnownSample]): int
+}
+class "List[TestingKnownSample]"
+class "List[TrainingKnownSample]"
+class "List[Hyperparameter]"
+TrainingData *---> "List[TrainingKnownSample]" : training >
+TrainingData *---> "List[TestingKnownSample]" : testing >
+TrainingData *---> "List[Hyperparameter]" : tuning >
+"List[TrainingKnownSample]" o--> TrainingKnownSample
+"List[TestingKnownSample]" o--> TestingKnownSample
+"List[Hyperparameter]" *--> Hyperparameter
+Sample <|- KnownSample
+TestingKnownSample *--> KnownSample
+TrainingKnownSample *--> KnownSample
+UnknownSample *--> Sample
+Hyperparameter ...> TrainingData : data >
+@enduml

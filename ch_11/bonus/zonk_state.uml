@@ -1,0 +1,78 @@
+@startuml zonk_state.png
+'figure 6: The Zonk States'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+state "Hand of dice" as hand
+state "Some scoring dice" as subset
+state "Go On" as choice <<choice>>
+state "Zonked!" as score0
+state "Score" as scoreall
+
+score0 : score nothing
+scoreall : score accumulated total
+hand : evaluate options
+
+[*] --> hand : Roll all the dice
+
+hand --> subset : Separate scoring dice
+
+subset --> hand : Reroll non-scoring dice
+
+hand --> score0 : No scoring dice
+
+hand --> choice : All dice score
+
+choice --> hand : Roll all the dice
+
+subset --> scoreall : Stand pat
+choice --> scoreall : Stand pat
+
+@enduml
+
+
+@startuml zonk_patterns.png
+'figure 7: The Zonk Patterns'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+class Hand {}
+
+class Dice {}
+
+abstract class Pattern {
++ condition(Dice) -> bool
+}
+
+class Three {}
+class Four {}
+class Five {}
+
+class SmallStraight {}
+
+class LargeStraight {}
+
+class Ace {}
+
+class Cinque {}
+
+Pattern <|-- Three
+Pattern <|-- Four
+Pattern <|-- Five
+Pattern <|-- SmallStraight
+Pattern <|-- LargeStraight
+Pattern <|-- Ace
+Pattern <|-- Cinque
+
+Hand -- "*" Dice
+Dice -- "*" Pattern
+
+@enduml

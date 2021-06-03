@@ -1,0 +1,48 @@
+@startuml
+'figure 3: Sample State Transitions'
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+
+class TrainingData {
+    name: str
+    uploaded: datetime.datetime
+    tested: datetime.datetime
+    load(source: Iterable)
+}
+class Sample {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+    species: str
+    classification: str
+}
+class KnownSample {
+    species is not None
+}
+class UnknownSample {
+    species is None
+}
+class Hyperparameter {
+    k: int
+    quality: float
+    classify(s: Sample): str
+    test(t: List[TestingKnownSample])
+}
+class "List[TestingKnownSample]"
+class "List[TrainingKnownSample]"
+class "List[Hyperparameter]"
+TrainingData *---> "List[TrainingKnownSample]" : training >
+TrainingData *---> "List[TestingKnownSample]" : testing >
+TrainingData *---> "List[Hyperparameter]" : tuning >
+"List[TrainingKnownSample]" o--> TrainingKnownSample
+"List[TestingKnownSample]" o--> TestingKnownSample
+"List[Hyperparameter]" *--> Hyperparameter
+Sample <|-- KnownSample
+KnownSample <|-- TestingKnownSample
+KnownSample <|-- TrainingKnownSample
+Sample <|-- UnknownSample
+Hyperparameter ...> TrainingData : data >
+@enduml

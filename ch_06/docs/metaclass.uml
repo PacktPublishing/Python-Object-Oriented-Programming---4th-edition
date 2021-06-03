@@ -1,0 +1,91 @@
+@startuml fig_3.png
+'figure 3: Default Metaclass diagram'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+skinparam classAttributeIconSize 0
+
+class type {
+__prepare__()
+__new__()
+}
+
+object source_code {
+"class MyClass: ..."
+}
+
+object "attributes and methods" as components {
+"def __init__(): ..."
+}
+
+class MyClass {
+__init__()
+}
+
+type ..> MyClass : "creates"
+
+source_code ..> components
+
+components ..> type
+
+MyClass --> type : "metaclass"
+
+object instance_1
+
+object instance_2
+
+MyClass --> instance_1 : "creates"
+MyClass --> instance_2 : "creates"
+
+@enduml
+
+
+@startuml fig_4.png
+'figure 4: Custom Metaclass diagram'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+skinparam classAttributeIconSize 0
+
+class type {
+__prepare__()
+__new__()
+}
+
+class SpecialMeta {
+__prepare__()
+__new__()
+}
+
+type <|-- SpecialMeta
+
+object source_code {
+"class MyClass: ..."
+}
+
+object "attributes and methods" as components {
+"def __init__(): ..."
+}
+
+class MyClass {
+__init__()
+}
+
+SpecialMeta ..> MyClass : "creates"
+
+source_code ..> components
+
+components ..> type
+
+MyClass --> SpecialMeta : "metaclass"
+
+object instance_1
+
+object instance_2
+
+MyClass --> instance_1 : "creates"
+MyClass --> instance_2 : "creates"
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+'figure 2: Dining Philosophers - Horizontal'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+'skinparam classAttributeIconSize 0
+'hide class circle
+'hide abstract circle
+
+(Fork 0)
+(Fork 1)
+(Fork 2)
+(Fork 3)
+(Fork 4)
+
+[Philosopher 0]
+[Philosopher 1]
+[Philosopher 2]
+[Philosopher 3]
+[Philosopher 4]
+
+
+(Fork 0) <.. [Philosopher 0]
+(Fork 1) <.. [Philosopher 0]
+[Philosopher 0] -- (Spaghetti)
+
+(Fork 0) <.. [Philosopher 1]
+(Fork 2) <.. [Philosopher 1]
+[Philosopher 1] -- (Spaghetti)
+
+(Fork 1) <.. [Philosopher 2]
+(Fork 3) <.. [Philosopher 2]
+[Philosopher 2] -- (Spaghetti)
+
+(Fork 2) <.. [Philosopher 3]
+(Fork 4) <.. [Philosopher 3]
+[Philosopher 3] -- (Spaghetti)
+
+(Fork 3) <.. [Philosopher 4]
+(Fork 4) <.. [Philosopher 4]
+[Philosopher 4] -- (Spaghetti)
+
+
+@enduml

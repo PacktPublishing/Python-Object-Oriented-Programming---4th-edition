@@ -1,0 +1,37 @@
+@startuml
+'figure 1a: Variables'
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+
+frame step1 {
+note "a_string_variable" as l1
+
+card 140214245924432 [
+"Hello, world!"
+----
+id = 140214245924432
+type = str
+hash = 8275030067265638305
+]
+
+l1 --> 140214245924432 : "refers to"
+}
+
+frame step2 {
+note "a_string_variable" as l2
+
+card 140214350732528 [
+42
+----
+id = 140214245924432
+type = int
+hash = 42
+]
+
+l2 --> 140214350732528 : "refers to"
+
+}
+
+@enduml

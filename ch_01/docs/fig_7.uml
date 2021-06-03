@@ -1,0 +1,19 @@
+@startuml
+'fig_7'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+hide abstract circle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+allowmixing
+
+actor :Player 1: as p1
+object "Chess Set" as cs
+actor :Player 2: as p2
+
+p1 --> cs : make_move
+cs <-- p2 : make_move
+@enduml

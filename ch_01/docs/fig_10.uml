@@ -1,0 +1,60 @@
+@startuml
+'fig_9'
+'left to right direction
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+hide abstract circle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Piece {
++ chess_set: Chess Set
++ color: Color
+}
+
+together {
+class Rook {
++ shape
++ move(board: Board)
+}
+
+class Bishop {
++ shape
++ move(board: Board)
+}
+
+class King {
++ shape
++ move(board: Board)
+}
+}
+
+class Knight {
++ shape
++ move(board: Board)
+}
+
+class Pawn {
++ shape
++ move(board: Board)
+}
+
+class Queen {
++ shape
++ move(board: Board)
+}
+
+
+Piece <|-d- Rook
+Piece <|-d- Bishop
+Piece <|-d- King
+Piece <|-- Knight
+Piece <|-- Pawn
+Piece <|-- Queen
+
+Rook -[hidden]-> Knight
+Bishop -[hidden]-> Pawn
+King -[hidden]-> Queen
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+'fig_3'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide methods
+
+class Apple {
++ color
++ weight
+}
+class Barrel {
++ size
+}
+Apple "*" --- "1"  Barrel : go in >
+
+class Orange {
++ weight
++ orchard
++ date_picked
+}
+class Basket {
++ location
+}
+Orange "*" --- "1" Basket : go in >
+
+
+@enduml

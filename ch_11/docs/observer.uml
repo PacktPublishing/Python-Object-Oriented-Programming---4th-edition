@@ -1,0 +1,42 @@
+@startuml
+'figure 3: The Observer Pattern'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+abstract class Observer {
+    + observable: Observable
+    + __call__()
+}
+
+abstract class Observable {
+    + _observers: List[Observer]
+    + attach(Observer)
+}
+
+class Core {
+    + _observers: List[Observer]
+    + attach(Observer)
+    + someAction()
+}
+
+class Observer1 {
+    + __call__()
+}
+
+class Observer2 {
+    + __call__()
+}
+
+Observable <|-- Core
+
+'alternative: Core::_observers *-- "*" Observer::observable'
+Observer::observable "*" --* Core::_observers
+
+Observer <|.. Observer1
+Observer <|.. Observer2
+
+@enduml

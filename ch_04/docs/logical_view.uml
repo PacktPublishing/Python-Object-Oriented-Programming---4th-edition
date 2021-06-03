@@ -1,0 +1,39 @@
+@startuml
+'figure 3: Logical View'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+
+class Flask {}
+class upload <<function>> {}
+hide upload attributes
+class test <<function>> {}
+hide test attributes
+class classify <<function>> {}
+hide classify attributes
+Flask *--> upload
+Flask *--> test
+Flask *--> classify
+
+class  authenticate <<decorator>> {}
+hide authenticate attributes
+upload ..> authenticate
+test ..> authenticate
+classify  ..> authenticate
+
+class Users {
+    get_user(name: str) : User
+}
+Flask *--> Users
+authenticate --> Users
+
+class User {
+    name: str
+    email: str
+}
+Users *--> User
+
+class Role <<Enumeration>>
+User --> Role
+@enduml

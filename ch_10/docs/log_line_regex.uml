@@ -1,0 +1,43 @@
+@startuml
+'figure 6: Log Line regex'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+state "Group <dt>" as group_dt {
+    state "\w\w\w \d\d, \d\d\d\d \d\d:\d\d:\d\d" as dt_1
+}
+
+state "\s" as space_1 {
+}
+
+state "Group <level>" as group_level {
+    state "\w" as level_letter
+    level_letter --> level_letter
+
+}
+
+state "\s" as space_2 {
+}
+
+state "Group <msg>" as group_msg {
+    state "." as message_char
+    message_char --> message_char
+}
+
+[*] -right-> group_dt
+group_dt -right-> space_1
+space_1 --> space_1
+
+space_1 -right-> group_level
+group_level -right-> space_2
+space_2 ---> space_2
+
+space_2 -right-> group_msg
+
+group_msg -right-> [*]
+
+@enduml

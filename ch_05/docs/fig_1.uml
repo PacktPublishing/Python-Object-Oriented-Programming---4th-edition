@@ -1,0 +1,36 @@
+@startuml
+'figure 1: The Sample Class Hierarchy'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+hide class circle
+
+class Sample {
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+}
+
+class KnownSample {
+    + sample_id: int
+    + species: str
+    - purpose: Purpose
+    + classification: Classification
+    classify(param: Hyperparameter) -> str
+}
+Sample <|-- KnownSample
+
+class UnknownSample {
+    + classification: Classification
+    classify(param: Hyperparameter) -> str
+}
+Sample <|-- UnknownSample
+
+class Classification{
+    species: str
+    parameter: Hyperparameter
+}
+UnknownSample *--> Classification
+KnownSample *--> Classification
+@enduml

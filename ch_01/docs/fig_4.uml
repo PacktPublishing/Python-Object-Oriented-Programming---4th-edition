@@ -1,0 +1,35 @@
+@startuml
+'fig_4'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide methods
+
+class Apple {
++ color: str
++ weight: float
++ barrel: Barrel
+}
+class Barrel {
++ size: int
++ apples: List[Apple]
+}
+Apple "*" --- "1"  Barrel : go in >
+
+class Orange {
++ weight: float
++ orchard: str
++ date_picked: date
++ basket: Basket
+}
+class Basket {
++ location: str
++ oranges: List[Orange}
+}
+Orange "*" --- "1" Basket : go in >
+
+
+@enduml

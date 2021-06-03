@@ -1,0 +1,20 @@
+@startuml
+'fig_1'
+left to right direction
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+hide members
+
+scale 2
+
+class Apple {}
+class Barrel {}
+Apple -- Barrel
+
+class Orange {}
+class Basket {}
+Orange -- Basket
+
+@enduml

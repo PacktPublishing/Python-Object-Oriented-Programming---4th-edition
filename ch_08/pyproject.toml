@@ -1,0 +1,43 @@
+[project]
+name = "classifier"
+version = "2021.4.0"
+description = "Python 3 Object-Oriented Programming, 4th ed., Chapter 8"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE.txt"}
+keywords = ["k-NN", "object-oriented design"]
+authors = [
+  {email = "slott56@gmail.com"},
+  {name = "Steven F. Lott"}
+]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+minversion = 3.4.0
+skipsdist = True
+
+[testenv]
+deps =
+  -rrequirements.txt
+  black
+  pytest==6.2.4
+  tox==3.20.0
+  mypy==0.812
+setenv =
+  PYTHONPATH = {toxinidir}/src
+  # Required to force a specific order for sets
+  PYTHONHASHSEED = 1502041761
+commands =
+  black src
+  python -m doctest --option ELLIPSIS docs/case_study_8.md
+  python -m doctest --option ELLIPSIS docs/examples.md
+  python -m doctest --option ELLIPSIS src/file_demo.py
+  python -m doctest --option ELLIPSIS src/function_demo.py
+  python -m doctest --option ELLIPSIS src/model.py
+  python -m doctest --option ELLIPSIS src/parameters.py
+  python -m doctest --option ELLIPSIS src/model.py
+  python -m pytest -vv
+  mypy --strict --show-error-codes --python-version 3.9 src
+
+"""

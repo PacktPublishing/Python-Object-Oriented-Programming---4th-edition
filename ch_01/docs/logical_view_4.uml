@@ -1,0 +1,15 @@
+@startuml
+'logical_view_4'
+skinparam monochrome true
+skinparam handwritten false
+hide class circle
+skinparam shadowing false
+
+class Hyperparameter {
+    k: int
+    quality: float
+    classify(sample: UnkownSample): str
+    matchesI(sample: KnownSample, species: str): bool
+}
+
+@enduml

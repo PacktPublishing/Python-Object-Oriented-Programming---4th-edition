@@ -1,0 +1,46 @@
+[project]
+name = "classifier"
+version = "2021.4.0"
+description = "Python 3 Object-Oriented Programming, 4th ed., Chapter 7"
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = [ "k-NN", "object-oriented design",]
+[[project.authors]]
+email = "slott56@gmail.com"
+
+[[project.authors]]
+name = "Steven F. Lott"
+
+[project.license]
+file = "LICENSE.txt"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+minversion = 3.4.0
+skipsdist = True
+[testenv]
+deps =
+	-rrequirements.txt
+	black
+	pytest==6.2.4
+	tox==3.20.0
+	mypy==0.812
+setenv =
+	PYTHONPATH = {toxinidir}/src
+	PYTHONHASHSEED = 0
+commands =
+	black src
+	python -m doctest --option ELLIPSIS src/model_t.py
+	python -m doctest --option ELLIPSIS src/lists.py
+	python -m doctest --option ELLIPSIS src/classifier.py
+	python -m doctest --option ELLIPSIS src/model_f.py
+	python -m doctest --option ELLIPSIS src/model.py
+	python -m doctest --option ELLIPSIS src/queue_example.py
+	python -m doctest --option ELLIPSIS src/dictionaries.py
+	python -m doctest --option ELLIPSIS src/dc_stocks.py
+	python -m doctest --option ELLIPSIS docs/examples.md
+	python -m doctest --option ELLIPSIS docs/case_study_7.md
+	python -m pytest -vv
+	mypy src
+"""
