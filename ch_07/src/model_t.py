@@ -29,7 +29,10 @@ class TestingKnownSample:
         self.classification = classification
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(sample={self.sample!r}, classification={self.classification!r})"
+        return (
+            f"{self.__class__.__name__}(sample={self.sample!r}, "
+            f"classification={self.classification!r})"
+        )
 
 
 class TrainingKnownSample(NamedTuple):

@@ -34,7 +34,8 @@ def test_checksum(working_directory: tuple[Path, Path]) -> None:
     name, checksum = old_checksum_path.read_text().rstrip().split()
     assert name == source_path.name
     assert (
-        checksum == "d9014c4624844aa5bac314773d6b689ad467fa4e1d1a50a1b8a99d5a95f72ff5"
+        checksum == "d9014c4624844aa5bac314773d6b689a"
+        "d467fa4e1d1a50a1b8a99d5a95f72ff5"
     )
 
 

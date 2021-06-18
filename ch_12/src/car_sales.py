@@ -16,30 +16,58 @@ def test_setup(db_name: str = "sales.db") -> sqlite3.Connection:
     conn = sqlite3.connect(db_name)
 
     conn.execute(
-        "CREATE TABLE IF NOT EXISTS Sales ("
-        "salesperson text, amt currency, year integer, model text, new boolean"
-        ")"
+        """
+        CREATE TABLE IF NOT EXISTS Sales (
+            salesperson text,
+            amt currency,
+            year integer,
+            model text,
+            new boolean
+        )
+        """
     )
 
-    conn.execute("DELETE FROM Sales")
     conn.execute(
-        "INSERT INTO Sales values" " ('Tim', 16000, 2010, 'Honda Fit', 'true')"
+        """
+        DELETE FROM Sales
+        """
+    )
+
+    conn.execute(
+        """
+        INSERT INTO Sales 
+        VALUES('Tim', 16000, 2010, 'Honda Fit', 'true')
+        """
     )
     conn.execute(
-        "INSERT INTO Sales values" " ('Tim', 9000, 2006, 'Ford Focus', 'false')"
+        """
+        INSERT INTO Sales 
+        VALUES('Tim', 9000, 2006, 'Ford Focus', 'false')
+        """
     )
     conn.execute(
-        "INSERT INTO Sales values" " ('Hannah', 8000, 2004, 'Dodge Neon', 'false')"
+        """
+        INSERT INTO Sales 
+        VALUES('Hannah', 8000, 2004, 'Dodge Neon', 'false')
+        """
     )
     conn.execute(
-        "INSERT INTO Sales values" " ('Hannah', 28000, 2009, 'Ford Mustang', 'true')"
+        """
+        INSERT INTO Sales 
+        VALUES('Hannah', 28000, 2009, 'Ford Mustang', 'true')
+        """
     )
     conn.execute(
-        "INSERT INTO Sales values"
-        " ('Hannah', 50000, 2010, 'Lincoln Navigator', 'true')"
+        """
+        INSERT INTO Sales 
+        VALUES('Hannah', 50000, 2010, 'Lincoln Navigator', 'true')
+        """
     )
     conn.execute(
-        "INSERT INTO Sales values" " ('Jason', 20000, 2008, 'Toyota Prius', 'false')"
+        """
+        INSERT INTO Sales 
+        VALUES('Jason', 20000, 2008, 'Toyota Prius', 'false')
+        """
     )
     conn.commit()
     return conn
@@ -85,13 +113,17 @@ import datetime
 
 class NewVehiclesQuery(QueryTemplate):
     def construct_query(self) -> None:
-        self.query = "select * from Sales where new='true'"
+        self.query = """
+            SELECT * FROM Sales WHERE new='true'
+        """
         self.header = ["salesperson", "amt", "year", "model", "new"]
 
 
 class SalesGrossQuery(QueryTemplate):
     def construct_query(self) -> None:
-        self.query = "select salesperson, sum(amt) from Sales group by salesperson"
+        self.query = """
+            SELECT salesperson, sum(amt) FROM Sales GROUP BY salesperson
+        """
         self.header = ["salesperson", "total sales"]
 
     def output_context(self) -> ContextManager[TextIO]:

@@ -20,7 +20,7 @@ class ComplexComponent {
     + some_part()
 }
 class AnotherComponent {
-    + another_partO()
+    + another_part()
 }
 
 }

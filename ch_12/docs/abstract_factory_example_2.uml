@@ -1,0 +1,138 @@
+@startuml abstract_factory-classes-2a.png
+'figure 6-a: The Abstract Factory Pattern'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+class Game {
+  + deck: List[Card]
+  + hand: Hand
+  + deal() : Hand
+  + score(hand: Hand) -> List[Trick]
+}
+
+abstract class CardGameFactory {
+    + make_card(rank, suit) : Card
+    + make_hand(cards) : Hand
+}
+
+abstract class Card {
+    rank: int
+    suit: Suit
+}
+
+abstract class Hand {
+    cards: List[Card]
+}
+
+Game -- CardGameFactory
+
+CardGameFactory -> Card : "makes"
+CardGameFactory -> Hand : "makes"
+
+Hand *-- Card
+
+package "Cribbage" {
+
+    class CribbageFactory {
+        + make_card(rank, suit) : Card
+        + make_hand(cards) : Hand
+    }
+    CardGameFactory <|--- CribbageFactory
+
+}
+
+
+package "Poker" {
+
+    class PokerFactory {
+        + make_card(rank, suit) : Card
+        + make_hand(cards) : Hand
+    }
+    CardGameFactory <|--- PokerFactory
+}
+
+@enduml
+
+@startuml abstract_factory-classes-2b.png
+'figure 6-b: The Abstract Factory Pattern'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+abstract class CardGameFactory {
+    + make_card(rank, suit) : Card
+    + make_hand(cards) : Hand
+}
+
+package "Cribbage" {
+
+    class CribbageFactory {
+        + make_card(rank, suit) : Card
+        + make_hand(cards) : Hand
+    }
+    CardGameFactory <|--- CribbageFactory
+
+    class CribbageCard {
+        + points : int
+    }
+    class CribbageFace {}
+    class CribbageAce {}
+    class CribbageHand {
+        + upcard(card: Card)
+    }
+
+    Card <|-- CribbageCard
+    CribbageCard <|-- CribbageFace
+    CribbageCard <|-- CribbageAce
+    Hand <|-- CribbageHand
+
+    CribbageFactory::make_card --> CribbageCard
+    CribbageFactory::make_hand --> CribbageHand
+
+    CribbageHand *-- "4" CribbageCard
+}
+
+@enduml
+
+@startuml abstract_factory-classes-2c.png
+'figure 6-c: The Abstract Factory Pattern'
+skinparam monochrome true
+skinparam handwritten false
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide class circle
+hide abstract circle
+
+abstract class CardGameFactory {
+    + make_card(rank, suit) : Card
+    + make_hand(cards) : Hand
+}
+
+package "Poker" {
+
+    class PokerFactory {
+        + make_card(rank, suit) : Card
+        + make_hand(cards) : Hand
+    }
+    CardGameFactory <|--- PokerFactory
+
+    class PokerCard {}
+    class PokerHand {}
+
+    Card <|-- PokerCard
+    Hand <|-- PokerHand
+
+    PokerFactory::make_card --> PokerCard
+    PokerFactory::make_hand --> PokerHand
+
+    PokerHand *-- "5" PokerCard
+}
+
+@enduml

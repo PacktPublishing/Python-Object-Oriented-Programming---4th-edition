@@ -6,7 +6,7 @@ Chapter 2. Case Study
 from __future__ import annotations
 from collections.abc import Iterator
 import datetime
-from typing import Optional, Union
+from typing import Optional, Union, Iterable
 
 
 class Sample:
@@ -87,7 +87,7 @@ class TrainingData:
         self.testing: list[Sample] = []
         self.tuning: list[Hyperparameter] = []
 
-    def load(self, raw_data_source: Iterator[dict[str, str]]) -> None:
+    def load(self, raw_data_source: Iterable[dict[str, str]]) -> None:
         """Load and partition the raw data"""
         for n, row in enumerate(raw_data_source):
             sample = Sample(

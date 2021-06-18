@@ -56,7 +56,9 @@ leg              dist  time fuel
 >>> for name, start, end in legs:
 ...     d = distance(*start, *end)
 ...     print(
-...         f"{name:16s} {d:5.2f} {d/speed:4.1f} {d/speed*fuel_per_hr:4.0f}")
+...         f"{name:16s} {d:5.2f} {d/speed:4.1f} "
+...         f"{d/speed*fuel_per_hr:4.0f}"
+...     )
 to st.michaels   17.07  3.4    8
 to oxford         6.41  1.3    3
 to cambridge      8.58  1.7    4

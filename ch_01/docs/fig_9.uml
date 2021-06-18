@@ -29,7 +29,7 @@ class Board {
 }
 
 Player "2" -- "1" chessset : make move >
-Position "64" --o "1" Board
+Position "64" --* "1" Board
 chessset "1" o-- "1" Board
 Piece "32" --o chessset
 @enduml

@@ -1,5 +1,5 @@
 @startuml
-'figure 12: The Abstract Factory Pattern'
+'figure 6: The Abstract Factory Pattern'
 skinparam monochrome true
 skinparam handwritten false
 skinparam shadowing false
@@ -68,7 +68,7 @@ package "Implementation 2" {
 @enduml
 
 @startuml abstract_factory-classes.png
-'figure 12: The Abstract Factory Pattern'
+'figure 7: The Abstract Factory Pattern'
 skinparam monochrome true
 skinparam handwritten false
 skinparam shadowing false
@@ -110,7 +110,7 @@ package "Cribbage" {
         + make_card(rank, suit) : Card
         + make_hand(cards) : Hand
     }
-    CardGameFactory <|--- CribbageFactory
+    CardGameFactory <|-- CribbageFactory
 
     class CribbageCard {
         + points : int
@@ -127,9 +127,9 @@ package "Cribbage" {
     Hand <|-- CribbageHand
 
     CribbageFactory::make_card --> CribbageCard
-    CribbageFactory::make_hand --> CribbageHand
+    CribbageFactory::make_hand -> CribbageHand
 
-    CribbageHand *-- "4" CribbageCard
+    CribbageHand *- "4" CribbageCard
 }
 
 
@@ -139,7 +139,7 @@ package "Poker" {
         + make_card(rank, suit) : Card
         + make_hand(cards) : Hand
     }
-    CardGameFactory <|--- PokerFactory
+    CardGameFactory <|-- PokerFactory
 
     class PokerCard {}
     class PokerHand {}
@@ -148,15 +148,15 @@ package "Poker" {
     Hand <|-- PokerHand
 
     PokerFactory::make_card --> PokerCard
-    PokerFactory::make_hand --> PokerHand
+    PokerFactory::make_hand -> PokerHand
 
-    PokerHand *-- "5" PokerCard
+    PokerHand *- "5" PokerCard
 }
 
 @enduml
 
 @startuml factory-modules.png
-'figure 12: The Abstract Factory Pattern'
+'figure 8: The Abstract Factory Pattern'
 skinparam monochrome true
 skinparam handwritten false
 skinparam shadowing false
